@@ -33,4 +33,25 @@ MC <- mvrnorm(10000, mu, sigma)
 MCportfolio <- MC%*%diag(weigths)
 
 percentile(MCportfolio, p = 0.05)
-                         
+
+################
+#Case Bootstrap#
+################
+
+x <- rnorm(1000, 0, 1)
+percentile(x, p = 0.05)
+ci <- quantile(x, p = 0.05)
+
+y <- rnorm(500, 0, 1)
+i<-0
+boot <- 0
+s <-0
+k <- 100000
+
+for (i in 1:k){
+  s <- sample(y, size = k, replace = TRUE)
+  boot[i] <- quantile(s, p = 0.05)
+}
+
+mean(boot)
+
